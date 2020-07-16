@@ -116,3 +116,32 @@ Then we use terraform to apply the changes:
 ```
 terraform apply
 ```
+
+<!-- DOC_START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| vault | ~> 2.11 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:-----:|
+| okta\_bound\_audiences | A list of allowed token audiences | `list` | n/a | yes |
+| okta\_client\_id | Okta Vault app client ID | `string` | n/a | yes |
+| okta\_client\_secret | Okta Vault app client secret | `string` | n/a | yes |
+| okta\_discovery\_url | Okta Authz server Issuer URI: i.e. https://<org>.okta.com/oauth2/<id> | `string` | n/a | yes |
+| vault\_addr | Vault address in the form of https://domain:8200 | `string` | n/a | yes |
+| cli\_port | Port to open locally to login with the CLI | `number` | `8250` | no |
+| okta\_allowed\_groups | Okta group for Vault admins | `list` | <pre>[<br>  "vault_admins"<br>]<br></pre> | no |
+| okta\_mount\_path | Mount path for Okta auth | `string` | `"okta_oidc"` | no |
+| roles | Map of Vault role names to their bound groups and token policies. Structure looks like this:<pre>roles = {<br>  okta_admin = {<br>    token_policies = ["admin"]<br>    bound_groups = ["vault_admins"]<br>  },<br>  okta_devs  = {<br>    token_policies = ["devs"]<br>    bound_groups = ["vault_devs"]<br>  }<br>}<br></pre> | `map` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| path | Okta OIDC auth path |
+| roles | Role names created by this module |
+

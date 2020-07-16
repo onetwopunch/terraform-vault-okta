@@ -19,13 +19,13 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
 
   allowed_redirect_uris = [
     "${var.vault_addr}/ui/vault/auth/${vault_jwt_auth_backend.okta_oidc.path}/oidc/callback",
-    
+
     # This is for logging in with the CLI if you want.
     "http://localhost:${var.cli_port}/oidc/callback",
   ]
 
-  user_claim            = "email"
-  role_type             = "oidc"
+  user_claim      = "email"
+  role_type       = "oidc"
   bound_audiences = var.okta_bound_audiences
   oidc_scopes = [
     "openid",

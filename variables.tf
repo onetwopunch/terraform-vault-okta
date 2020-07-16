@@ -1,5 +1,5 @@
 variable "vault_addr" {
-  type = string
+  type        = string
   description = "Vault address in the form of https://domain:8200"
 }
 
@@ -21,28 +21,44 @@ variable "okta_mount_path" {
 }
 
 variable "okta_client_id" {
-  type = string
+  type        = string
   description = "Okta Vault app client ID"
 }
 
 variable "okta_client_secret" {
-  type = string
+  type        = string
   description = "Okta Vault app client secret"
 }
 
 variable "okta_bound_audiences" {
-  type = list
+  type        = list
   description = "A list of allowed token audiences"
 }
 
-variable "roles" {
-  type = map
-  description = "Map of Vault role names to their bound groups and token policies. See terraform.tfvars.sample for structure."
-  default = {}
+variable "cli_port" {
+  type        = number
+  description = "Port to open locally to login with the CLI"
+  default     = 8250
 }
 
-variable "cli_port" {
-  type = number
-  description = "Port to open locally to login with the CLI"
-  default = 8250
+variable "roles" {
+  type    = map
+  default = {}
+
+  description = <<EOF
+Map of Vault role names to their bound groups and token policies. Structure looks like this:
+
+```
+roles = {
+  okta_admin = {
+    token_policies = ["admin"]
+    bound_groups = ["vault_admins"]
+  },
+  okta_devs  = {
+    token_policies = ["devs"]
+    bound_groups = ["vault_devs"]
+  }
+}
+```
+EOF
 }
