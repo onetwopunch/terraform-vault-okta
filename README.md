@@ -31,6 +31,14 @@ module "okta" {
 }
 ```
 
+### Login via the CLI
+
+Login either via the UI or the CLI. If you want to get a local vault token, you'll need to run the following command, which will spin up a listener process by default on port 8250. You can override this with `port=xxx` in this command but you'll need to also update the redirect URIs in Okta and add the `cli_port` terraform variable. 
+
+```
+vault login -method=oidc -path=okta_oidc role=okta-admin
+```
+
 ## Setting up Okta OIDC Auth
 
 For this to work, you'll need to be an Okta administrator:
