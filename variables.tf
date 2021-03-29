@@ -57,6 +57,24 @@ variable "cli_port" {
   default     = 8250
 }
 
+variable "default_lease_ttl" {
+  type        = string
+  description = "Default lease TTL for Vault token"
+  default     = "768h"
+}
+
+variable "max_lease_ttl" {
+  type        = string
+  description = "Maximum lease TTL for Vault token"
+  default     = "768h"
+}
+
+variable "token_type" {
+  type        = string
+  description = "Token type for Vault token"
+  default     = "default-service"
+}
+
 variable "roles" {
   type    = map
   default = {}

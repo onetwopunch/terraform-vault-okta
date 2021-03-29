@@ -33,6 +33,10 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
   role_name      = each.key
   token_policies = each.value.token_policies
 
+  default_lease_ttl = var.okta_default_lease_ttl
+  max_lease_ttl     = var.okta_max_lease_ttl
+  token_type        = var.okta_token_type
+
   allowed_redirect_uris = [
     "${var.vault_addr}/ui/vault/auth/${vault_jwt_auth_backend.okta_oidc.path}/oidc/callback",
 
