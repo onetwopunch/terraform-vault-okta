@@ -33,7 +33,7 @@ module "okta" {
 
 ### Login via the CLI
 
-Login either via the UI or the CLI. If you want to get a local vault token, you'll need to run the following command, which will spin up a listener process by default on port 8250. You can override this with `port=xxx` in this command but you'll need to also update the redirect URIs in Okta and add the `cli_port` terraform variable. 
+Login either via the UI or the CLI. If you want to get a local vault token, you'll need to run the following command, which will spin up a listener process by default on port 8250. You can override this with `port=xxx` in this command but you'll need to also update the redirect URIs in Okta and add the `cli_port` terraform variable.
 
 ```
 vault login -method=oidc -path=okta_oidc role=okta-admin
@@ -174,6 +174,9 @@ terraform apply
 | okta\_allowed\_groups | Okta group for Vault admins | `list` | <pre>[<br>  "vault_admins"<br>]<br></pre> | no |
 | okta\_mount\_path | Mount path for Okta auth | `string` | `"okta_oidc"` | no |
 | roles | Map of Vault role names to their bound groups and token policies. Structure looks like this:<pre>roles = {<br>  okta_admin = {<br>    token_policies = ["admin"]<br>    bound_groups = ["vault_admins"]<br>  },<br>  okta_devs  = {<br>    token_policies = ["devs"]<br>    bound_groups = ["vault_devs"]<br>  }<br>}<br></pre> | `map` | `{}` | no |
+| okta\_default\_lease\_ttl | Default lease TTL for Vault tokens | `string` | `"768h"` | no |
+| okta\_max\_lease\_ttl | Maximum lease TTL for Vault tokens | `string` | `"768h"` | no |
+| okta\_token\_type | Token type for Vault tokens | `string` | `"default-service"` | no |
 
 ## Outputs
 
@@ -181,4 +184,3 @@ terraform apply
 |------|-------------|
 | path | Okta OIDC auth path |
 | roles | Role names created by this module |
-
