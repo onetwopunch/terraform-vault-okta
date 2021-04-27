@@ -24,6 +24,9 @@ resource "vault_jwt_auth_backend" "okta_oidc" {
   oidc_client_secret = var.okta_client_secret
   tune {
     listing_visibility = "unauth"
+    default_lease_ttl  = var.okta_default_lease_ttl
+    max_lease_ttl      = var.okta_max_lease_ttl
+    token_type         = var.okta_token_type
   }
 }
 
