@@ -50,6 +50,7 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
     "openid",
     "profile",
     "email",
+    "groups",
   ]
   bound_claims = {
     groups = join(",", each.value.bound_groups)
