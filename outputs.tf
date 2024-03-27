@@ -23,3 +23,7 @@ output "path" {
   description = "Okta OIDC auth path"
   value       = vault_jwt_auth_backend.okta_oidc.path
 }
+
+output "accessor" {
+  value       = vault_jwt_auth_backend.okta_oidc.accessor
+}
